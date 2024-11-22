@@ -3,5 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    command: flask --app hackaton run --debug --host 0.0.0.0
+    ports:
+      - 5000:5000
     volumes:
       - .:/var/www/app
