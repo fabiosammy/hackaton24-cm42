@@ -32,12 +32,13 @@ curl -X DELETE http://127.0.0.1:7777/vaults/1
 ## Passwords
 
 ```bash
-curl http://127.0.0.1:7777/vaults/1/passwords
+curl -X GET http://127.0.0.1:7777/vaults/1/passwords
 curl -X POST -H "Content-Type: application/json" -d '{
   "name": "Account for LoboGuaraGuardian",
   "username": "user123",
   "password": "securepassword"
 }' http://127.0.0.1:7777/vaults/1/passwords
+curl -X GET http://127.0.0.1:7777/vaults/1/passwords/1
 ```
 
 
