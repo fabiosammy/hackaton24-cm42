@@ -23,7 +23,7 @@ services:
 
   client:
     <<: *app
-    command: bash -c "cd client && pnpm run dev -- --host 0.0.0.0"
+    command: bash -c "cd client && pnpm run dev --host 0.0.0.0"
     ports:
       - 5173:5173
 
