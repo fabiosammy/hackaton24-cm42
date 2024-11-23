@@ -12,7 +12,8 @@ class Credential(db.Model):
     username = db.Column(db.String, nullable=False)
     password_salt = db.Column(db.String(32), nullable=False)
     password_encrypted = db.Column(db.LargeBinary, nullable=False)
-    otp_key = db.Column(db.String, nullable=True)
+    otp_key_salt = db.Column(db.String(32), nullable=True)
+    otp_key_encrypted = db.Column(db.LargeBinary, nullable=True)
     description = db.Column(db.Text, nullable=True)
     
     # Relations
@@ -39,6 +40,21 @@ class Credential(db.Model):
         self.password_salt = salt
         password_with_salt = f"{salt}{value}".encode('utf-8')
         self.password_encrypted = self._fernet.encrypt(password_with_salt)
+
+    @property
+    def otp_key(self):
+        if not self.otp_key_encrypted or not self.otp_key_salt:
+            return None
+        otp_key_with_salt = self._fernet.decrypt(self.otp_key_encrypted).decode('utf-8')
+        return otp_key_with_salt[len(self.otp_key_salt):]
+
+    @otp_key.setter
+    def otp_key(self, value):
+        if value is not None:
+            salt = self.generate_salt()
+            self.otp_key_salt = salt
+            otp_key_with_salt = f"{salt}{value}".encode('utf-8')
+            self.otp_key_encrypted = self._fernet.encrypt(otp_key_with_salt)
 
     @property
     def basic_serialize(self):
