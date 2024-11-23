@@ -35,3 +35,10 @@ If you need, you can destroy everything and start from scratch.
 ```bash
 docker compose down -v
 ```
+
+# Future steps
+
+- [ ] Add multiple tags to a password
+- [ ] Add multiple websites to a password
+- [ ] Support to import / export
+- [ ] Add security layer at the export
