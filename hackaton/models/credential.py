@@ -1,7 +1,7 @@
 from ..extensions import db
 
-class Password(db.Model):
-    __tablename__ = 'passwords'
+class Credential(db.Model):
+    __tablename__ = 'credentials'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
@@ -12,7 +12,7 @@ class Password(db.Model):
     
     # Relations
     vault_id = db.Column(db.Integer, db.ForeignKey('vaults.id'), nullable=False)
-    vault = db.relationship('Vault', back_populates='passwords')
+    vault = db.relationship('Vault', back_populates='credentials')
 
     @property
     def basic_serialize(self):
@@ -37,4 +37,4 @@ class Password(db.Model):
         }
 
     def __repr__(self):
-        return f'<Password {self.name}>'
+        return f'<Credential {self.name}>'

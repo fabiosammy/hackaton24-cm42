@@ -29,22 +29,22 @@ curl -X PUT -H "Content-Type: application/json" -d '{"name": "Updated Vault"}' h
 curl -X DELETE http://127.0.0.1:7777/vaults/1
 ```
 
-## Passwords
+## Credentials
 
 ```bash
-curl -X GET http://127.0.0.1:7777/vaults/1/passwords
+curl -X GET http://127.0.0.1:7777/vaults/1/credentials
 curl -X POST -H "Content-Type: application/json" -d '{
   "name": "Account for LoboGuaraGuardian",
   "username": "user123",
   "password": "securepassword"
-}' http://127.0.0.1:7777/vaults/1/passwords
-curl -X GET http://127.0.0.1:7777/vaults/1/passwords/1
+}' http://127.0.0.1:7777/vaults/1/credentials
+curl -X GET http://127.0.0.1:7777/vaults/1/credentials/1
 curl -X PUT -H "Content-Type: application/json" -d '{
     "name": "Updated Password Name",
     "username": "updated_username",
     "description": "Updated description"
-}' http://127.0.0.1:7777/vaults/1/passwords/1
-curl -X DELETE http://127.0.0.1:7777/vaults/1/passwords/1
+}' http://127.0.0.1:7777/vaults/1/credentials/1
+curl -X DELETE http://127.0.0.1:7777/vaults/1/credentials/1
 ```
 
 
@@ -57,7 +57,7 @@ docker compose down -v
 
 # Future steps
 
-- [ ] Add multiple tags to a password
-- [ ] Add multiple websites to a password
+- [ ] Add multiple tags to a credential
+- [ ] Add multiple websites to a credential
 - [ ] Support to import / export
 - [ ] Add security layer at the export

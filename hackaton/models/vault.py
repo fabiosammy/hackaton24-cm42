@@ -7,7 +7,7 @@ class Vault(db.Model):
     name = db.Column(db.String, nullable=False)
 
     # Relations
-    passwords = db.relationship('Password', back_populates='vault', cascade='all, delete-orphan')
+    credentials = db.relationship('Credential', back_populates='vault', cascade='all, delete-orphan')
 
     @property
     def serialize(self):

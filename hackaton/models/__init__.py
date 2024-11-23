@@ -1,5 +1,5 @@
 from .vault import Vault
-from .password import Password
+from .credential import Credential
 
 def init_models():
     pass

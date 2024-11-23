@@ -1,5 +1,5 @@
 from .vaults_controller import VaultsController
-from .passwords_controller import PasswordsController
+from .credentials_controller import CredentialsController
 
 def init_controllers():
     pass
