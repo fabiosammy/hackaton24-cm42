@@ -7,7 +7,7 @@
 	let passwordLength = $state(MIN_PASSWORD_LENGTH);
 </script>
 
-<div class="m-8 flex flex-col items-center justify-center border border-red-500 p-4">
+<div class="m-8 flex flex-col items-center justify-center p-4">
 	<div class="container m-4">
 		<h1 class="my-8 text-4xl font-bold text-white">Gerador de Senhas</h1>
 
