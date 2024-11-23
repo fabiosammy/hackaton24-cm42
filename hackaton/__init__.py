@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
 db = SQLAlchemy()
-migrate = Migrate()
+migrate = Migrate(directory='./hackaton/migrations')
 
 def create_app(test_config=None):
     # create and configure the app
