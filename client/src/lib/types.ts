@@ -11,3 +11,13 @@ export type CredentialDTO = {
 	description?: string;
 	vault_id: string;
 };
+
+export type Credential = {
+	id: string;
+	name: string;
+	username: string;
+	password: string;
+	otp_key?: string;
+	description?: string;
+	vault_id: string;
+};

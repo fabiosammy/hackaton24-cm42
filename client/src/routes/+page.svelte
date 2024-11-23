@@ -12,9 +12,9 @@
 	{#if !store.isLoggedIn}
 		Faça seu Login
 	{:else}
-		<div class="container m-4 border border-red-500">
+		<div class="container m-4 flex flex-col gap-16 border border-red-500">
 			<CredentialForm />
-			<CredentialList />
+			<CredentialList credentials={[]} />
 		</div>
 	{/if}
 </div>
