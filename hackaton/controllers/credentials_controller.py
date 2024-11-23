@@ -2,6 +2,8 @@ from flask import jsonify, request
 from ..extensions import db
 from ..models.vault import Vault
 from ..models.credential import Credential
+from ..models.tag import Tag
+from ..models.url import Url
 
 class CredentialsController:
     @staticmethod
@@ -33,6 +35,17 @@ class CredentialsController:
             vault=vault
         )
 
+        for url_value in data['urls']:
+            new_url = Url(name=url_value, credential=new_credential)
+            db.session.add(new_url)
+
+        for tag_name in data['tags']:
+            tag = Tag.query.filter_by(name=tag_name, vault_id=vault_id).first()
+            if not tag:
+                tag = Tag(name=tag_name, vault=vault)
+                db.session.add(tag)
+            new_credential.tags.append(tag)
+
         db.session.add(new_credential)
         db.session.commit()
         return jsonify(new_credential.basic_serialize), 201
@@ -63,6 +76,19 @@ class CredentialsController:
         credential.password = data.get('password', credential.password)
         credential.otp_key = data.get('otp_key', credential.otp_key)
         credential.description = data.get('description', credential.description)
+
+        credential.urls.clear()
+        for url_value in data['urls']:
+            new_url = Url(name=url_value, credential=credential)
+            db.session.add(new_url)
+
+        credential.tags.clear()
+        for tag_name in data['tags']:
+            tag = Tag.query.filter_by(name=tag_name, vault_id=vault_id).first()
+            if not tag:
+                tag = Tag(name=tag_name, vault=vault)
+                db.session.add(tag)
+            credential.tags.append(tag)
 
         db.session.commit()
         return jsonify(credential.serialize)

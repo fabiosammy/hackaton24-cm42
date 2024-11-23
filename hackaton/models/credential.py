@@ -1,4 +1,5 @@
 from ..extensions import db
+from .tag import credential_tags
 
 class Credential(db.Model):
     __tablename__ = 'credentials'
@@ -13,6 +14,8 @@ class Credential(db.Model):
     # Relations
     vault_id = db.Column(db.Integer, db.ForeignKey('vaults.id'), nullable=False)
     vault = db.relationship('Vault', back_populates='credentials')
+    tags = db.relationship('Tag', secondary=credential_tags, back_populates='credentials')
+    urls = db.relationship('Url', back_populates='credential', cascade='all, delete-orphan')
 
     @property
     def basic_serialize(self):
@@ -21,6 +24,8 @@ class Credential(db.Model):
             'name': self.name,
             'username': self.username,
             'description': self.description,
+            'urls': [url.name for url in self.urls],
+            'tags': [tag.name for tag in self.tags],
             'vault_id': self.vault_id
         }
 
@@ -33,6 +38,8 @@ class Credential(db.Model):
             'password': self.password,
             'otp_key': self.otp_key,
             'description': self.description,
+            'urls': [url.name for url in self.urls],
+            'tags': [tag.name for tag in self.tags],
             'vault_id': self.vault_id
         }
 
