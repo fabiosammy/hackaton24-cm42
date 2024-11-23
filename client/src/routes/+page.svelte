@@ -1,8 +1,20 @@
+<script lang="ts">
+	import CredentialForm from '$lib/components/home/CredentialForm.svelte';
+	import CredentialList from '$lib/components/home/CredentialList.svelte';
+	import { store } from '$lib/state/store.svelte';
+
+	let { data } = $props();
+</script>
+
+<title>Lobo-Guará: O Guardião de suas senhas, e Protetor da sua sanidade.</title>
+
 <div class="flex flex-col items-center">
-	<h1 class="text-2xl font-bold text-red-500">Welcome to SvelteKit</h1>
-	<a
-		href="/demo/paraglide"
-		class="rounded-md border border-black bg-slate-200 px-2 py-1 transition-colors duration-300 hover:bg-slate-100"
-		>Go to i18n Demo</a
-	>
+	{#if !store.isLoggedIn}
+		Faça seu Login
+	{:else}
+		<div class="container m-4 flex flex-col gap-16 border border-red-500">
+			<CredentialForm />
+			<CredentialList credentials={[]} />
+		</div>
+	{/if}
 </div>
