@@ -1,6 +1,6 @@
 import { error, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import type { Vault } from '$lib/types';
+import type { AppCredential, CredentialDTO } from '$lib/types';
 import { API_BASE_URL } from '$env/static/private';
 
 export const actions = {
@@ -11,11 +11,17 @@ export const actions = {
 
 export const load: PageServerLoad = async () => {
 	try {
-		const response = await fetch(`${API_BASE_URL}/vaults`);
-		const data: Vault[] = await response.json();
+		const response = await fetch(`${API_BASE_URL}/vaults/4/credentials`);
+		const credentialsDTO: CredentialDTO[] = await response.json();
+		const credentials: AppCredential[] = credentialsDTO.map((credential) => ({
+			name: credential.name,
+			description: credential.description,
+			password: credential.password,
+			username: credential.username
+		}));
 
 		return {
-			vaults: data
+			credentials
 		};
 	} catch (e) {
 		// TODO deal with errors

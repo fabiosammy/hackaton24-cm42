@@ -1,4 +1,5 @@
 export type Vault = {
+	id: string;
 	name: string;
 };
 
@@ -14,9 +15,8 @@ export type CredentialDTO = {
 };
 
 export type AppCredential = {
-	id: string;
 	name: string;
 	username: string;
+	description?: string;
 	password: string;
-	tags: string[];
 };
