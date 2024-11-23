@@ -13,6 +13,7 @@ export const load: PageServerLoad = async () => {
 		};
 	} catch (e) {
 		// TODO deal with errors
-		// error(404, { message: 'not found' });
+		console.error(e);
+		error(404, { message: 'not found placeholder' });
 	}
 };

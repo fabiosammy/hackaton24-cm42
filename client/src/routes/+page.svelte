@@ -1,4 +1,6 @@
 <script lang="ts">
+	import CredentialForm from '$lib/components/home/CredentialForm.svelte';
+	import CredentialList from '$lib/components/home/CredentialList.svelte';
 	import { store } from '$lib/state/store.svelte';
 
 	let { data } = $props();
@@ -11,8 +13,8 @@
 		Faça seu Login
 	{:else}
 		<div class="container m-4 border border-red-500">
-			<div>New Credential Form</div>
-			<div>Credentials List</div>
+			<CredentialForm />
+			<CredentialList />
 		</div>
 	{/if}
 </div>

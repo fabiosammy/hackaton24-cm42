@@ -12,7 +12,9 @@
 	};
 </script>
 
-<header class="flex h-40 items-center justify-between border border-zinc-100 p-4 px-8">
+<header
+	class="flex flex-col items-center justify-between gap-4 border border-zinc-100 p-4 md:flex-row"
+>
 	<div class="flex items-center gap-4">
 		<img
 			{src}
