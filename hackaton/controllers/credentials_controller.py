@@ -2,6 +2,7 @@ from flask import jsonify, request
 from ..extensions import db
 from ..models.vault import Vault
 from ..models.credential import Credential
+from ..models.tag import Tag
 
 class CredentialsController:
     @staticmethod
@@ -33,6 +34,13 @@ class CredentialsController:
             vault=vault
         )
 
+        for tag_name in data['tags']:
+            tag = Tag.query.filter_by(name=tag_name, vault_id=vault_id).first()
+            if not tag:
+                tag = Tag(name=tag_name, vault=vault)
+                db.session.add(tag)
+            new_credential.tags.append(tag)
+
         db.session.add(new_credential)
         db.session.commit()
         return jsonify(new_credential.basic_serialize), 201
@@ -63,6 +71,14 @@ class CredentialsController:
         credential.password = data.get('password', credential.password)
         credential.otp_key = data.get('otp_key', credential.otp_key)
         credential.description = data.get('description', credential.description)
+
+        credential.tags.clear()
+        for tag_name in data['tags']:
+            tag = Tag.query.filter_by(name=tag_name, vault_id=vault_id).first()
+            if not tag:
+                tag = Tag(name=tag_name, vault=vault)
+                db.session.add(tag)
+            credential.tags.append(tag)
 
         db.session.commit()
         return jsonify(credential.serialize)
