@@ -17,6 +17,11 @@ docker compose run --rm server flask db upgrade
 
 Now check if the server is running on [http://localhost:7777](http://localhost:7777)
 
+You can also seed the db using (it will DESTROY all you current data):
+```bash
+docker compose run --rm server python lobo_guara_seeds.py
+```
+
 # Endpoints
 
 ## Vaults
