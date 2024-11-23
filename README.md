@@ -37,14 +37,16 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "name": "Account for LoboGuaraGuardian",
   "username": "user123",
   "password": "securepassword",
-  "tags": ["personal", "email"]
+  "tags": ["personal", "email"],
+  "urls": ["personal.io"]
 }' http://127.0.0.1:7777/vaults/1/credentials
 curl -X GET http://127.0.0.1:7777/vaults/1/credentials/1
 curl -X PUT -H "Content-Type: application/json" -d '{
     "name": "Updated Password Name",
     "username": "updated_username",
     "description": "Updated description",
-  "tags": ["personal", "email", "updated"]
+    "tags": ["personal", "email", "updated"],
+    "urls": ["https://loboguara.guardian", "https://app.loboguara.guardian"]
 }' http://127.0.0.1:7777/vaults/1/credentials/1
 curl -X DELETE http://127.0.0.1:7777/vaults/1/credentials/1
 ```
