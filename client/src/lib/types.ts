@@ -9,6 +9,7 @@ export type CredentialDTO = {
 	password: string;
 	otp_key?: string;
 	description?: string;
+	tags: string[];
 	vault_id: string;
 };
 
@@ -17,7 +18,5 @@ export type AppCredential = {
 	name: string;
 	username: string;
 	password: string;
-	otp_key?: string;
-	description?: string;
-	vault_id: string;
+	tags: string[];
 };

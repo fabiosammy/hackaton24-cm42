@@ -32,7 +32,7 @@
 	<nav class="flex gap-4">
 		<a
 			href="/"
-			class={`transition-all duration-300 hover:text-white ${$page.url.pathname === '/' && 'font-bold text-white underline'}`}
+			class={`transition-all duration-300 p-2 hover:text-white ${$page.url.pathname === '/' && 'font-bold text-white underline'}`}
 			aria-current={$page.url.pathname === '/'}
 		>
 			Início
@@ -40,7 +40,7 @@
 
 		<a
 			href="/password-generator"
-			class={`transition-all duration-300 hover:text-white ${$page.url.pathname === '/password-generator' && 'font-bold text-white underline'}`}
+			class={`transition-all duration-300 p-2 hover:text-white ${$page.url.pathname === '/password-generator' && 'font-bold text-white underline'}`}
 			aria-current={$page.url.pathname === '/password-generator'}
 		>
 			Gerador de Senhas
@@ -48,11 +48,11 @@
 
 		<div class="flex w-16 justify-center">
 			{#if store.isLoggedIn}
-				<button class="transition-colors duration-300 hover:text-white" onclick={logOut}
+				<button class="transition-colors duration-300 hover:text-white p-2" onclick={logOut}
 					>Sair</button
 				>
 			{:else}
-				<button class="transition-colors duration-300 hover:text-white" onclick={logIn}
+				<button class="transition-colors duration-300 hover:text-white p-2" onclick={logIn}
 					>Entrar</button
 				>
 			{/if}
