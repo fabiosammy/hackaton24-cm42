@@ -1,5 +1,6 @@
 import os
 import base64
+from cryptography.fernet import Fernet
 from ..extensions import db
 from .tag import credential_tags
 
@@ -9,7 +10,8 @@ class Credential(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    password_salt = db.Column(db.String(32), nullable=False)
+    password_encrypted = db.Column(db.LargeBinary, nullable=False)
     otp_key = db.Column(db.String, nullable=True)
     description = db.Column(db.Text, nullable=True)
     
@@ -19,9 +21,24 @@ class Credential(db.Model):
     tags = db.relationship('Tag', secondary=credential_tags, back_populates='credentials')
     urls = db.relationship('Url', back_populates='credential', cascade='all, delete-orphan')
 
+    # Encryption/decryption key
+    _fernet = Fernet(os.getenv('LOBO_GUARA_KEY'))
+
     @staticmethod
     def generate_salt():
         return base64.urlsafe_b64encode(os.urandom(16)).decode('utf-8')
+
+    @property
+    def password(self):
+        password_with_salt = self._fernet.decrypt(self.password_encrypted).decode('utf-8')
+        return password_with_salt[len(self.password_salt):]
+
+    @password.setter
+    def password(self, value):
+        salt = self.generate_salt()
+        self.password_salt = salt
+        password_with_salt = f"{salt}{value}".encode('utf-8')
+        self.password_encrypted = self._fernet.encrypt(password_with_salt)
 
     @property
     def basic_serialize(self):
