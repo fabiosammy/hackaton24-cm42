@@ -48,6 +48,26 @@ class PasswordsController:
         return jsonify(password.serialize)
 
     @staticmethod
+    def update_password(vault_id, password_id):
+        vault = Vault.query.get(vault_id)
+        if not vault:
+            return jsonify({'message': 'Vault not found'}), 404
+        password = Password.query.filter_by(vault_id=vault_id, id=password_id).first()
+        if not password:
+            return jsonify({'message': 'Password not found in this vault'}), 404
+
+        data = request.get_json()
+
+        password.name = data.get('name', password.name)
+        password.username = data.get('username', password.username)
+        password.password = data.get('password', password.password)
+        password.otp_key = data.get('otp_key', password.otp_key)
+        password.description = data.get('description', password.description)
+
+        db.session.commit()
+        return jsonify(password.serialize)
+
+    @staticmethod
     def destroy_password(vault_id, password_id):
         vault = Vault.query.get(vault_id)
         if not vault:

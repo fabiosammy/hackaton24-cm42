@@ -39,6 +39,11 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "password": "securepassword"
 }' http://127.0.0.1:7777/vaults/1/passwords
 curl -X GET http://127.0.0.1:7777/vaults/1/passwords/1
+curl -X PUT -H "Content-Type: application/json" -d '{
+    "name": "Updated Password Name",
+    "username": "updated_username",
+    "description": "Updated description"
+}' http://127.0.0.1:7777/vaults/1/passwords/1
 curl -X DELETE http://127.0.0.1:7777/vaults/1/passwords/1
 ```
 
