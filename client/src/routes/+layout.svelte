@@ -7,7 +7,7 @@
 </script>
 
 <ParaglideJS {i18n}>
-	<div class="min-h-screen bg-amber-800 text-zinc-200">
+	<div class="min-h-screen bg-slate-800 text-zinc-400">
 		<Header />
 
 		{@render children()}

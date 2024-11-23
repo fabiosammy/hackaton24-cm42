@@ -1,14 +1,18 @@
+import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-	const response = await fetch('http://localhost:7777/hello');
-	const r = await response.text();
+	try {
+		const response = await fetch('http://localhost:7777/hello');
+		const r = await response.text();
 
-	console.log(r);
+		const test = r;
 
-	const test = r;
-
-	return {
-		test
-	};
+		return {
+			test
+		};
+	} catch (e) {
+		// TODO deal with errors
+		// error(404, { message: 'not found' });
+	}
 };

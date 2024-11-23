@@ -1,7 +1,4 @@
-const LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const NUMBERS = '0123456789';
-const SPECIAL_CHARS = '!@#$%^&*()_+[]{}|;:,.<>?';
+import { LOWERCASE, UPPERCASE, NUMBERS, SPECIAL_CHARS } from '$lib/constants/characters';
 
 type GeneratePasswordProps = {
 	length: number;
