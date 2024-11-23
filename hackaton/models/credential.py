@@ -1,3 +1,5 @@
+import os
+import base64
 from ..extensions import db
 from .tag import credential_tags
 
@@ -16,6 +18,10 @@ class Credential(db.Model):
     vault = db.relationship('Vault', back_populates='credentials')
     tags = db.relationship('Tag', secondary=credential_tags, back_populates='credentials')
     urls = db.relationship('Url', back_populates='credential', cascade='all, delete-orphan')
+
+    @staticmethod
+    def generate_salt():
+        return base64.urlsafe_b64encode(os.urandom(16)).decode('utf-8')
 
     @property
     def basic_serialize(self):
