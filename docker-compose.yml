@@ -4,6 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
     command: echo "Disabled by default"
+    environment:
+      - FLASK_APP=hackaton
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@database:5432/hackaton?sslmode=disable&gssencmode=disable
     volumes:
       - .:/var/www/app
 
@@ -11,10 +15,23 @@ services:
     <<: *app
     command: flask --app hackaton run --debug --host 0.0.0.0
     ports:
-      - 5000:5000
+      - 7777:5000
+    depends_on:
+      - database
 
   client:
     <<: *app
     command: bash -c "cd client && npm run dev -- --host 0.0.0.0"
     ports:
       - 5173:5173
+
+  database:
+    image: postgres:17.2-alpine3.20
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+volumes:
+  postgres-data:
