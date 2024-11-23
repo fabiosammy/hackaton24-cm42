@@ -12,7 +12,7 @@ export type CredentialDTO = {
 	vault_id: string;
 };
 
-export type Credential = {
+export type AppCredential = {
 	id: string;
 	name: string;
 	username: string;
