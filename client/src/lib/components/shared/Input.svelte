@@ -14,6 +14,6 @@
 	{/if}
 	<input
 		{...rest}
-		class={'rounded-full px-2 py-2 text-base font-bold text-zinc-700 transition-colors duration-200 focus:border-transparent focus:ring-red-600'}
+		class={`rounded-full px-2 py-2 text-base font-bold text-zinc-700 transition-colors duration-200 focus:border-transparent focus:ring-red-600 ${rest.class}`}
 	/>
 </div>
