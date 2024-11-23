@@ -29,6 +29,18 @@ curl -X PUT -H "Content-Type: application/json" -d '{"name": "Updated Vault"}' h
 curl -X DELETE http://127.0.0.1:7777/vaults/1
 ```
 
+## Passwords
+
+```bash
+curl http://127.0.0.1:7777/vaults/1/passwords
+curl -X POST -H "Content-Type: application/json" -d '{
+  "name": "Account for LoboGuaraGuardian",
+  "username": "user123",
+  "password": "securepassword"
+}' http://127.0.0.1:7777/vaults/1/passwords
+```
+
+
 # Troubleshooting
 
 If you need, you can destroy everything and start from scratch.
