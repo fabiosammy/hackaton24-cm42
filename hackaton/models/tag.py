@@ -2,8 +2,8 @@ from ..extensions import db
 
 credential_tags = db.Table(
     'credential_tags',
-    db.Column('credential_id', db.Integer, db.ForeignKey('credentials.id'), primary_key=True),
-    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'), primary_key=True)
+    db.Column('credential_id', db.Integer, db.ForeignKey('credentials.id', ondelete='CASCADE'), primary_key=True),
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id', ondelete='CASCADE'), primary_key=True)
 )
 
 class Tag(db.Model):
