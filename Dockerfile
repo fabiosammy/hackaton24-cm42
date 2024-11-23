@@ -41,13 +41,16 @@ WORKDIR $APP
 ENV NVM_DIR=/home/devel/.nvm
 ENV NVM_VERSION=0.40.1
 ENV NODE_VERSION=22.11.0
+ENV PNPM_HOME=/home/devel/.pnpm
+ENV PNPM_VERSION=9.14.2
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash \
   && . ~/.nvm/nvm.sh \
   && nvm install ${NODE_VERSION} \
   && nvm alias default ${NODE_VERSION} \
-  && nvm use default
+  && nvm use default \
+  && curl -fsSL https://get.pnpm.io/install.sh | bash -
 ENV NODE_PATH=${NVM_DIR}/versions/node/v${NODE_VERSION}/lib/node_modules
-ENV PATH=${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PATH}
+ENV PATH=${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:${PNPM_HOME}:${PATH}
 
 # Using python venv
 ENV PYTHON_VENV=${HOME}/.python-venv
@@ -55,4 +58,3 @@ RUN python -m venv ${PYTHON_VENV}
 ENV PATH=${PYTHON_VENV}/bin:${PATH}
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-
