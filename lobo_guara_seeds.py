@@ -1,4 +1,5 @@
 import random
+import pyotp
 from faker import Faker
 from hackaton import create_app
 from hackaton.extensions import db
@@ -37,7 +38,7 @@ def create_vaults_and_credentials():
                 name=f"Account {i+1}",
                 username=fake.user_name(),
                 password=fake.password(),
-                otp_key=fake.sha256(raw_output=False)[:16],
+                otp_key=pyotp.random_base32(),
                 description=fake.sentence(),
                 vault=vault
             )
