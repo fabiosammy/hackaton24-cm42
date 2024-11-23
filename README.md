@@ -17,6 +17,11 @@ docker compose run --rm server flask db upgrade
 
 Now check if the server is running on [http://localhost:7777](http://localhost:7777)
 
+You can also seed the db using (it will DESTROY all you current data):
+```bash
+docker compose run --rm server python lobo_guara_seeds.py
+```
+
 # Endpoints
 
 ## Vaults
@@ -45,6 +50,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
     "name": "Updated Password Name",
     "username": "updated_username",
     "description": "Updated description",
+    "otp_key": "C6T3QOL4PVCHITFL",
     "tags": ["personal", "email", "updated"],
     "urls": ["https://loboguara.guardian", "https://app.loboguara.guardian"]
 }' http://127.0.0.1:7777/vaults/1/credentials/1
@@ -63,7 +69,7 @@ docker compose down -v
 
 - [X] Add multiple tags to a credential
 - [X] Add multiple websites to a credential
-- [ ] Encrypt sensible data (password and otp)
+- [X] Encrypt sensible data (password and otp)
 - [ ] Add the user auth
 - [ ] Support to import / export
 - [ ] Add security layer at the export
