@@ -15,6 +15,16 @@ class Password(db.Model):
     vault = db.relationship('Vault', back_populates='passwords')
 
     @property
+    def basic_serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'username': self.username,
+            'description': self.description,
+            'vault_id': self.vault_id
+        }
+
+    @property
     def serialize(self):
         return {
             'id': self.id,

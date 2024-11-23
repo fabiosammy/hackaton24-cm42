@@ -10,7 +10,7 @@ class PasswordsController:
         if not vault:
             return jsonify({'message': 'Vault not found'}), 404
         return jsonify([
-            password.serialize
+            password.basic_serialize
             for password in vault.passwords
         ])
 
@@ -35,4 +35,4 @@ class PasswordsController:
 
         db.session.add(new_password)
         db.session.commit()
-        return jsonify(new_password.serialize), 201
+        return jsonify(new_password.basic_serialize), 201
