@@ -16,4 +16,4 @@ routes.add_url_rule('/vaults/<int:vault_id>/passwords', view_func=PasswordsContr
 routes.add_url_rule('/vaults/<int:vault_id>/passwords', view_func=PasswordsController.create_password, methods=['POST'])
 routes.add_url_rule('/vaults/<int:vault_id>/passwords/<int:password_id>', view_func=PasswordsController.show_password, methods=['GET'])
 # routes.add_url_rule('/vaults/<int:vault_id>/passwords/<int:password_id>', view_func=PasswordsController.update, methods=['PUT'])
-# routes.add_url_rule('/vaults/<int:vault_id>/passwords/<int:password_id>', view_func=PasswordsController.destroy, methods=['DELETE'])
+routes.add_url_rule('/vaults/<int:vault_id>/passwords/<int:password_id>', view_func=PasswordsController.destroy_password, methods=['DELETE'])
