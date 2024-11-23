@@ -1,0 +1,3 @@
+<div>
+  Vaults page
+</div>
