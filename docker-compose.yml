@@ -1,10 +1,20 @@
 services:
-  app:
+  app: &app
     build:
       context: .
       dockerfile: Dockerfile
+    command: echo "Disabled by default"
+    volumes:
+      - .:/var/www/app
+
+  server:
+    <<: *app
     command: flask --app hackaton run --debug --host 0.0.0.0
     ports:
       - 5000:5000
-    volumes:
-      - .:/var/www/app
+
+  client:
+    <<: *app
+    command: bash -c "cd client && npm run dev -- --host 0.0.0.0"
+    ports:
+      - 5173:5173
