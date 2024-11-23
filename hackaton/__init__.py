@@ -3,6 +3,8 @@ import os
 from flask import Flask
 from .extensions import db, migrate
 from .models import init_models
+from .controllers import init_controllers
+from .routes import routes
 
 def create_app(test_config=None):
     # create and configure the app
@@ -28,6 +30,7 @@ def create_app(test_config=None):
     # Registering extensions
     db.init_app(app)
     migrate.init_app(app, db)
+    app.register_blueprint(routes)
 
     # a simple page that says hello
     @app.route('/hello')
