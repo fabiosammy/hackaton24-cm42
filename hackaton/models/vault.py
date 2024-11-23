@@ -6,6 +6,9 @@ class Vault(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
+    # Relations
+    credentials = db.relationship('Credential', back_populates='vault', cascade='all, delete-orphan')
+
     @property
     def serialize(self):
         return {
