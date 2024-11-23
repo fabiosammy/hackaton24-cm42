@@ -1,3 +1,4 @@
+fastapi[standard]==0.115.5
 Flask==3.1.0
 Flask-Migrate==4.0.7
 Flask-SQLAlchemy==3.1.1
