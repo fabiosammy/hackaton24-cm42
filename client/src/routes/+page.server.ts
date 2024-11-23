@@ -1,5 +1,11 @@
-import { error } from '@sveltejs/kit';
+import { error, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+
+export const actions = {
+	createCredential: async (event) => {
+		console.log(event.request.method);
+	}
+} satisfies Actions;
 
 export const load: PageServerLoad = async () => {
 	try {
