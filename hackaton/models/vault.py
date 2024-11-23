@@ -8,6 +8,7 @@ class Vault(db.Model):
 
     # Relations
     credentials = db.relationship('Credential', back_populates='vault', cascade='all, delete-orphan')
+    tags = db.relationship('Tag', back_populates='vault', cascade='all, delete-orphan')
 
     @property
     def serialize(self):
