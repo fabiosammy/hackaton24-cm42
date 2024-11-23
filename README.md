@@ -64,7 +64,7 @@ docker compose down -v
 
 - [X] Add multiple tags to a credential
 - [X] Add multiple websites to a credential
-- [ ] Encrypt sensible data (password and otp)
+- [X] Encrypt sensible data (password and otp)
 - [ ] Add the user auth
 - [ ] Support to import / export
 - [ ] Add security layer at the export
