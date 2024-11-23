@@ -37,21 +37,6 @@
 					<th class="p-4">
 						<p class="text-sm font-normal leading-none">Project Name</p>
 					</th>
-					<th class="p-4">
-						<p class="text-sm font-normal leading-none">Start Date</p>
-					</th>
-					<th class="p-4">
-						<p class="text-sm font-normal leading-none">End Date</p>
-					</th>
-					<th class="p-4">
-						<p class="text-sm font-normal leading-none">Owner</p>
-					</th>
-					<th class="p-4">
-						<p class="text-sm font-normal leading-none">Budget</p>
-					</th>
-					<th class="p-4">
-						<p></p>
-					</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,17 +44,9 @@
 					<td class="p-4">
 						<p class="text-sm font-bold">Project Alpha</p>
 					</td>
-					<td class="p-4">
-						<p class="text-sm">01/01/2024</p>
-					</td>
+
 					<td class="p-4">
 						<p class="text-sm">30/06/2024</p>
-					</td>
-					<td class="p-4">
-						<p class="text-sm">John Michael</p>
-					</td>
-					<td class="p-4">
-						<p class="text-sm">$50,000</p>
 					</td>
 					<td class="p-4">
 						<a href="#" class="text-sm font-semibold"> Edit </a>

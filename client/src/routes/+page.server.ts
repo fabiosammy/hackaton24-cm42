@@ -1,5 +1,7 @@
 import { error, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import type { Vault } from '$lib/types';
+import { API_BASE_URL } from '$env/static/private';
 
 export const actions = {
 	createCredential: async (event) => {
@@ -9,13 +11,11 @@ export const actions = {
 
 export const load: PageServerLoad = async () => {
 	try {
-		const response = await fetch('http://localhost:7777/hello');
-		const r = await response.text();
-
-		const test = r;
+		const response = await fetch(`${API_BASE_URL}/vaults`);
+		const data: Vault[] = await response.json();
 
 		return {
-			test
+			vaults: data
 		};
 	} catch (e) {
 		// TODO deal with errors
