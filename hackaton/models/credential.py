@@ -1,6 +1,7 @@
 import os
 import base64
 from cryptography.fernet import Fernet
+import pyotp
 from ..extensions import db
 from .tag import credential_tags
 
@@ -57,6 +58,14 @@ class Credential(db.Model):
             self.otp_key_encrypted = self._fernet.encrypt(otp_key_with_salt)
 
     @property
+    def otp_code(self):
+        return pyotp.TOTP(self.otp_key).now()
+
+    @property
+    def otp_next_code(self):
+        return pyotp.HOTP(self.otp_key).at(0)
+
+    @property
     def basic_serialize(self):
         return {
             'id': self.id,
@@ -76,6 +85,8 @@ class Credential(db.Model):
             'username': self.username,
             'password': self.password,
             'otp_key': self.otp_key,
+            'otp_code': self.otp_code,
+            'otp_next_code': self.otp_next_code,
             'description': self.description,
             'urls': [url.name for url in self.urls],
             'tags': [tag.name for tag in self.tags],
